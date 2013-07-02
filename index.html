@@ -1,0 +1,107 @@
+<html>
+    <head>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script type="text/javascript" src="ktable.js"></script>
+        <style>
+            body,html
+            {
+                font-family:Calibri; font-size:10px;
+            }
+        .rowSelected
+        {
+        background-color:yellow;
+        }
+        .rowEnabled
+        {
+        background-color:#0ff;
+        }
+        .rowHover
+        {
+        background-color:#97F9BF;
+        }
+        .tHeader
+        {
+        background-color:black; color:white;
+        }
+        .tblList
+        {
+         margin:30px;border-spacing:0;
+        border-top:1px solid gray; border-left:1px solid gray; padding:0px;
+        }
+        .tblList td, .tblList th
+        {
+        border-right:1px solid gray; margin:0px; border-bottom:1px solid gray;  padding:5px;
+        }
+        </style>
+    </head>
+    <body>
+      <div>
+          <h2>For lazy people, kTbl plugin makes a little styling & interactiveness to your tables!</h2>
+      </div>
+        <table class="tblList" > 
+    <tr class="trHead">
+        <th class="thCheckB">
+            <input type="checkbox" class="chkAll2" />
+        </th>
+        <th>Name</th>
+        <th>Product Code</th>
+    </tr>
+       <tr class="even">
+            <td class="tdCheckB">
+                <input class="chkSelect" id="1" name="item.IsSelected" type="checkbox" value="true" /><input name="item.IsSelected" type="hidden" value="false" />
+            </td>
+            <td>
+                <a href="/products/edit/1">EXPLORER</a>           
+            </td>
+            <td>EXPLORER</td>
+       </tr>
+       <tr class="odd">
+            <td class="tdCheckB">
+                <input class="chkSelect" id="2" name="item.IsSelected" type="checkbox" value="true" /><input name="item.IsSelected" type="hidden" value="false" />
+            </td>
+            <td>
+                <a href="/products/edit/2">F-150</a>           
+            </td>
+            <td>F-150</td>
+       </tr>
+       <tr class="even">
+            <td class="tdCheckB">
+                <input class="chkSelect" id="3" name="item.IsSelected" type="checkbox" value="true" /><input name="item.IsSelected" type="hidden" value="false" />
+            </td>
+            <td>
+                <a href="/products/edit/3">MUSTANG</a>           
+            </td>
+            <td>MUSTANG</td>
+       </tr>
+       <tr class="odd">
+            <td class="tdCheckB">
+                <input class="chkSelect" id="5" name="item.IsSelected" type="checkbox" value="true" /><input name="item.IsSelected" type="hidden" value="false" />
+            </td>
+            <td>
+                <a href="/products/edit/5">FUSION</a>           
+            </td>
+            <td>FN</td>
+       </tr>
+       <tr class="even">
+            <td class="tdCheckB">
+                <input class="chkSelect" id="6" name="item.IsSelected" type="checkbox" value="true" /><input name="item.IsSelected" type="hidden" value="false" />
+            </td>
+            <td>
+                <a href="/products/edit/6">ESCAPE</a>           
+            </td>
+            <td>ESCAPE</td>
+       </tr>
+
+
+</table>
+     
+
+    </body>
+    <script type="text/javascript">
+        $(function () {
+            $("table").ktable({ checkedRowClass: "rowEnabled", headerCheckBoxClass: "chkAll2" }).css({ "color": "blue" });
+        });
+    </script>
+</html>
+
+
