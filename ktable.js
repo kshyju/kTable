@@ -1,12 +1,12 @@
 /*
-*   ktbl plugin for HTML tables,  
+*   kTable plugin for HTML tables,  
 *   Free to use under the MIT license.
-*   Shyju @kshyju
+*   Original Author : Shyju (Twitter : @kshyju)
 
 */
 ; (function ($, window, document, undefined) {
-    if (!$.problemSolver) {
-        $.problemSolver = {};
+    if (!$.techiesweb) {
+        $.techiesweb = {};
     };
     $.fn.ktable = function (options) {
         //default options
@@ -18,7 +18,7 @@
                                     headerClass: "tHeader",
                                     filterable: {
                                         filterableColumnClassName: 'filterable',
-                                        callBackOnFitler: '',
+                                        callBackOnFilter: '',
                                         callBackOnClear: ''
                                     }
         }, options);
@@ -63,6 +63,9 @@
             });
                      
    //Filter
+          if (settings.filterable.callBackOnFilter)
+          {
+
            var tableHeaders = _tbl.find("th." + settings.filterable.filterableColumnClassName);
            tableHeaders.each(function (index, item) {
                var _header = $(item);
@@ -70,7 +73,7 @@
                var dataType = "string";
                if (_header.attr("datatype") !== undefined)
                    dataType = _header.attr("datatype");
-               // console.log(headerText);
+
                var anchorId = headerText.split('/').join('').split(' ').join('-');
 
 
@@ -133,8 +136,8 @@
            //Execute the callback function when clicking on the filter button 
            $(document).on("click", "button[type='submit']", function (e) {
                var _clickedSubmit = $(this);
-               if (settings.filterable.callBackOnFitler)
-                   settings.filterable.callBackOnFitler(_clickedSubmit.closest("form"));
+               if (settings.filterable.callBackOnFilter)
+                   settings.filterable.callBackOnFilter(_clickedSubmit.closest("form"));
 
                _clickedSubmit.closest("div.popupContainer").hide();
            });
@@ -150,7 +153,7 @@
                    settings.filterable.callBackOnClear(_clickedReset.closest("form"));
            });
 
-
+          } //if filter is enabled
 
        }); // return this.each
 
