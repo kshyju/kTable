@@ -67,7 +67,7 @@ kTable provides a filter feature which you can apply on your table headers. This
     });
     
 
-![ ktable](https://f.cloud.github.com/assets/144469/1021494/76f6ce24-0d08-11e3-9e46-6ad407fef325.png"kTable")
+![ ktable](https://f.cloud.github.com/assets/144469/1021494/76f6ce24-0d08-11e3-9e46-6ad407fef325.png)
 
 ### Properties
 ####filterableColumnClassName
