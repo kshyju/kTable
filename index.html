@@ -1,6 +1,6 @@
 <html>
     <head>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
     <script type="text/javascript" src="ktable.js"></script>
         <style>
             body,html
@@ -19,9 +19,13 @@
         {
         background-color:#97F9BF;
         }
+            td
+            {
+                white-space:nowrap;
+            }
         .tHeader
         {
-        background-color:black; color:white;
+        background-color:#F1F1CD; color:#FFFFFF;
         }
         .tblList
         {
@@ -32,6 +36,56 @@
         {
         border-right:1px solid gray; margin:0px; border-bottom:1px solid gray;  padding:5px;
         }
+                .k-filter
+{
+    background-image: url('Images/filter.png');   background-position:3px; background-repeat: no-repeat;   width:20px; height:20px;float:left;
+   border:none;
+}
+.filter-selected
+{
+    background-image: url('Images/filter-selected.png');   background-position:3px; background-repeat: no-repeat;   width:20px; height:20px;float:left;
+   border:none;
+}
+.sortHeader,.sortHeader:hover
+{
+    display: block;
+    line-height: 18px;
+    margin: -0.5em -0.6em -0.4em;
+    min-height: 18px;
+    padding: 0.5em 0.6em 0.4em;color: #232323;cursor: pointer;
+    outline: 0 none;
+    text-decoration: none;
+}
+.k-grid-filter {
+    float: right;
+    margin: -0.5em -0.6em -0.4em;
+    padding: 0.5em 0.2em 0.4em;
+    position: relative;
+    z-index: 1;
+}
+.popupContainer
+{
+    border:1px solid #DBDBDE; overflow:auto; padding:10px; border-radius: 0 0 4px 4px; background-color:#FFFFFF;box-shadow: 0 2px 2px 0 rgba(82, 90, 104, 0.2);
+}
+.filter-button {
+    background-color: #F3F3F4;
+    border-color: #DBDBDE;
+    color: #515967;
+}
+.filter-button{
+    margin: 0.5em 4% 0 0;
+    width: 46%; border-radius: 4px 4px 4px 4px;box-shadow: none;border-style: solid;
+    border-width: 1px; cursor:pointer;
+}
+.filter-button:hover
+{
+    background-color:#A6AFBE;border-color:#A6AFBE;
+    color:#263248;
+}
+SELECT.ddlSearchType
+{
+    width:99%; margin-bottom:6px; margin-top:5px;
+}
         </style>
     </head>
     <body>
@@ -43,8 +97,10 @@
         <th class="thCheckB">
             <input type="checkbox" class="chkAll2" />
         </th>
-        <th>Name</th>
-        <th>Product Code</th>
+        <th class="filterable">Name</th>
+        <th class="filterable">Product Code</th>
+        <th class="filterable" datatype="date">Order date</th>
+
     </tr>
        <tr class="even">
             <td class="tdCheckB">
@@ -53,7 +109,10 @@
             <td>
                 <a href="/products/edit/1">EXPLORER</a>           
             </td>
-            <td>EXPLORER</td>
+            <td>FORD EXPLORER</td>
+           <td>
+               Jan 10th, 2013
+           </td>
        </tr>
        <tr class="odd">
             <td class="tdCheckB">
@@ -63,6 +122,9 @@
                 <a href="/products/edit/2">F-150</a>           
             </td>
             <td>F-150</td>
+                      <td>
+                Jan 10th, 2013
+           </td>
        </tr>
        <tr class="even">
             <td class="tdCheckB">
@@ -72,6 +134,9 @@
                 <a href="/products/edit/3">MUSTANG</a>           
             </td>
             <td>MUSTANG</td>
+                      <td>
+               Jan 10th, 2013
+           </td>
        </tr>
        <tr class="odd">
             <td class="tdCheckB">
@@ -81,6 +146,9 @@
                 <a href="/products/edit/5">FUSION</a>           
             </td>
             <td>FN</td>
+                      <td>
+                Jan 10th, 2013
+           </td>
        </tr>
        <tr class="even">
             <td class="tdCheckB">
@@ -90,6 +158,9 @@
                 <a href="/products/edit/6">ESCAPE</a>           
             </td>
             <td>ESCAPE</td>
+                      <td>
+                Jan 10th, 2013
+           </td>
        </tr>
 
 
@@ -99,7 +170,15 @@
     </body>
     <script type="text/javascript">
         $(function () {
-            $("table").ktable({ checkedRowClass: "rowEnabled", headerCheckBoxClass: "chkAll2" }).css({ "color": "blue" });
+            $("table").ktable({
+                checkedRowClass: "rowEnabled",
+                headerCheckBoxClass: "chkAll2",
+                filterable: {
+                    filterableColumnClassName: 'filterable',
+                    callBackOnFitler: function (item) { alert("Filter clicked") },
+                    callBackOnClear: function (item) { alert("Clear clicked") }
+                }
+            });
         });
     </script>
 </html>
