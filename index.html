@@ -1,98 +1,41 @@
+<!DOCTYPE html>
 <html>
     <head>
+          <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    
+    <meta name="viewport" content="width=device-width" />
+        <title>kTable</title>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+
+    <link href="ktable.css" type="text/css" rel="stylesheet" >
+        <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/themes/ui-lightness/jquery-ui.min.css" type="text/css" rel="stylesheet" >
+        
+
+
     <script type="text/javascript" src="ktable.js"></script>
-        <style>
-            body,html
-            {
-                font-family:Calibri; font-size:10px;
-            }
-        .rowSelected
-        {
-        background-color:yellow;
-        }
-        .rowEnabled
-        {
-        background-color:#0ff;
-        }
-        .rowHover
-        {
-        background-color:#97F9BF;
-        }
-            td
-            {
-                white-space:nowrap;
-            }
-        .tHeader
-        {
-        background-color:#F1F1CD; color:#FFFFFF;
-        }
-        .tblList
-        {
-         margin:30px;border-spacing:0;
+    <style>
+    body,html
+    {
+        font-family:Calibri; font-size:12px;
+    }
+    .tblList
+    {
+        margin:30px;border-spacing:0;
         border-top:1px solid gray; border-left:1px solid gray; padding:0px;
-        }
-        .tblList td, .tblList th
-        {
-        border-right:1px solid gray; margin:0px; border-bottom:1px solid gray;  padding:5px;
-        }
-                .k-filter
-{
-    background-image: url('Images/filter.png');   background-position:3px; background-repeat: no-repeat;   width:20px; height:20px;float:left;
-   border:none;
-}
-.filter-selected
-{
-    background-image: url('Images/filter-selected.png');   background-position:3px; background-repeat: no-repeat;   width:20px; height:20px;float:left;
-   border:none;
-}
-.sortHeader,.sortHeader:hover
-{
-    display: block;
-    line-height: 18px;
-    margin: -0.5em -0.6em -0.4em;
-    min-height: 18px;
-    padding: 0.5em 0.6em 0.4em;color: #232323;cursor: pointer;
-    outline: 0 none;
-    text-decoration: none;
-}
-.k-grid-filter {
-    float: right;
-    margin: -0.5em -0.6em -0.4em;
-    padding: 0.5em 0.2em 0.4em;
-    position: relative;
-    z-index: 1;
-}
-.popupContainer
-{
-    border:1px solid #DBDBDE; overflow:auto; padding:10px; border-radius: 0 0 4px 4px; background-color:#FFFFFF;box-shadow: 0 2px 2px 0 rgba(82, 90, 104, 0.2);
-}
-.filter-button {
-    background-color: #F3F3F4;
-    border-color: #DBDBDE;
-    color: #515967;
-}
-.filter-button{
-    margin: 0.5em 4% 0 0;
-    width: 46%; border-radius: 4px 4px 4px 4px;box-shadow: none;border-style: solid;
-    border-width: 1px; cursor:pointer;
-}
-.filter-button:hover
-{
-    background-color:#A6AFBE;border-color:#A6AFBE;
-    color:#263248;
-}
-SELECT.ddlSearchType
-{
-    width:99%; margin-bottom:6px; margin-top:5px;
-}
-        </style>
+    }
+    .tblList td, .tblList th
+    {
+        border-right:1px solid gray; margin:0px; border-bottom:1px solid gray;  padding:5px; text-align:left;
+    }
+   
+    </style>
     </head>
     <body>
       <div>
           <h2>For lazy people, kTbl plugin makes a little styling & interactiveness to your tables!</h2>
       </div>
-        <table class="tblList" > 
+    <table class="tblList" id="new" cellpadding="0" cellspacing="0" > 
     <tr class="trHead">
         <th class="thCheckB">
             <input type="checkbox" class="chkAll2" />
@@ -107,9 +50,9 @@ SELECT.ddlSearchType
                 <input class="chkSelect" id="1" name="item.IsSelected" type="checkbox" value="true" /><input name="item.IsSelected" type="hidden" value="false" />
             </td>
             <td>
-                <a href="/products/edit/1">EXPLORER</a>           
+                <a href="/products/edit/1">EXPLORER LIMITED ED</a>           
             </td>
-            <td>FORD EXPLORER</td>
+            <td>FORD EXPLORER  LIMITED ED</td>
            <td>
                Jan 10th, 2013
            </td>
@@ -167,18 +110,38 @@ SELECT.ddlSearchType
 </table>
      
 
+        <select id="ddlDate" style="display:none;">
+            <option value="equal">:) Is Equal</option>
+            <option value="greater">:) Greater than</option>
+             <option value="between">:) Between</option>
+        </select>
+        <select id="ddlText">
+            <option value="same">:( Same as</option>
+            <option value="starts">:(Starts</option>
+             <option value="ends">Ends</option>
+        </select>
     </body>
     <script type="text/javascript">
         $(function () {
-            $("table").ktable({
+            var userDateFormat = "mm/dd/yy";
+
+            $("#new").ktable({
                 checkedRowClass: "rowEnabled",
                 headerCheckBoxClass: "chkAll2",
                 filterable: {
                     filterableColumnClassName: 'filterable',
                     callBackOnFilter: function (item) { alert("Filter clicked") },
-                    callBackOnClear: function (item) { alert("Clear clicked") }
+                    callBackOnClear: function (item) { alert("Clear clicked") } ,
+                    bindDefaultDatePicker :true
+                   , dropDownContent: {
+                        source: {
+                            date: "ddlDate",
+                            text: "ddlText"
+                        }
+                   }                  
                 }
             });
+           
         });
     </script>
 </html>
