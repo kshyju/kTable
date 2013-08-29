@@ -23,7 +23,14 @@
                 callBackOnFilter: '',
                 callBackOnClear: '',
                 bindDefaultDatePicker: false,
-                dateFormat: "mm/dd/yy"
+                dateFormat: "mm/dd/yy",
+                validationErrorClassName:'ktable-filter-validation-error'
+            },
+            sortable:
+            {
+              callBackOnAscending :'',
+              callBackOnDescending:''
+
             }
         };
 
@@ -73,19 +80,43 @@
            tableHeaders.each(function (index, item) {
                var _header = $(item);
                var headerText = _header.text();
+               var headerId=_header.attr("id");
+
+
                var dataType = "string";
                if (_header.attr("datatype") !== undefined)
                    dataType = _header.attr("datatype");
 
-               var anchorId = headerText.split('/').join('').split(' ').join('-');
+               headerText = $.trim(headerText);
+              
+               var anchorId = headerText.split('/').join('').split(' ').join('');
+              
+               if(typeof headerId=='undefined')
+                headerId=anchorId;
 
-               // console.log(anchorId);
-               var newHeaderMarkup = "<a href='#' datatype='" + dataType + "' id=" + anchorId + " class='ktable-filter'><span class='k-filter'></span></a><a class='sortHeader'>" + headerText + "</a>";
+               console.log(headerId);
+
+
+               var newHeaderMarkup = "<a href='#' datatype='" + dataType + "' id='" + headerId + "' class='ktable-filter'><span class='k-filter'></span></a>";
+               if(settings.sortable.callBackOnAscending)
+               {
+
+                newHeaderMarkup+="<a class='ktable-sortHeader' id='sort-"+headerId+"' for='"+headerId+"'>" + headerText + "<span class='ktable-sort' sortorder='none'></span></a>";
+               }
+              else
+
+              {
+               newHeaderMarkup+="<a>" + headerText + "</a>";
+             }
                _header.html(newHeaderMarkup);
 
            });
 
            //event binding for the dynamically added elements
+
+
+
+
            $(document).on("click", "a.ktable-filter", function (e) {           
 
                //build the animation container
@@ -93,40 +124,86 @@
                clickedAnchorId = _clickedAnchor.attr("id");
                var popupId = "popup-" + clickedAnchorId;              
 
-               //Hide existing open popups, remove the selected filter css class
-               $(".popupContainer").slideUp(200);
-               $("span.filter-selected").removeClass("filter-selected");
+               var dataType = "string";
+               if (_clickedAnchor.attr("datatype") === "date")
+                   dataType = "date";
 
-               if ($("#" + popupId).length > 0) {
-                   $("#" + popupId).fadeIn(100);
-                   _clickedAnchor.find("span.k-filter").addClass("filter-selected");
-                   return;
-               }
 
                var headerHeight = _clickedAnchor.closest("tr").height();
                var top = _clickedAnchor.closest("tr").offset().top + headerHeight;
-               var left = e.pageX - _clickedAnchor.closest(".k-grid-filter").width();             
+               var left = e.pageX - _clickedAnchor.closest(".k-grid-filter").width();
 
                
-               var popupMarkup = "<div id='" + popupId + "' for='" + clickedAnchorId + "' class='popupContainer' style='display:none;position:absolute;top:" + top + "px; left:" + left + "px;'>";
-               popupMarkup += "<form><div>";
+
+                var popupWidth=$("#"+popupId).width();
+               
+               
+
+               //Hide existing open popups, remove the selected filter css class
+               $(".popupContainer").slideUp(200);
+               $("span.filter-selected").each(function () {
+                   if ($(this).hasClass("active")==false) {
+                       $(this).removeClass("filter-selected");
+                   }
+               });
+
+               if ($("#" + popupId).length > 0) {
+                   $("#" + popupId).fadeIn(100);
+                   _clickedAnchor.find("span.k-filter").addClass("filter-selected"); 
+                   return;
+               }
+
+             
+
+               
+               var popupMarkup = "<div id='" + popupId + "' for='" + clickedAnchorId + "' class='popupContainer' style='display:none;position:absolute;'>";
+               popupMarkup += "<form class='ktableform' for='" + clickedAnchorId + "' data-type='" + dataType + "'><div>";
                popupMarkup += "<div class='filterHeader'>" + settings.filterable.filterHeaderText + "</div>";
-               popupMarkup += "<div class='searchType'><select class='ddlSearchType'>" + getSelectOptions (_clickedAnchor)+ "</select></div>";
-               if (_clickedAnchor.attr("datatype") === "date") {
+               popupMarkup += "<div class='searchType'><select class='ktable-searchtype'>" + getSelectOptions (_clickedAnchor)+ "</select></div>";
+               if (dataType === "date") {
                  
-                   popupMarkup += "<div class='searchBox'><input type='text' class='filter-input kTableDatePicker' /></div>";
+                   popupMarkup += "<div class='searchBox'><input type='text' class='filter-input kTableDatePicker active-filter-input' /></div>";
                    popupMarkup += "<div class='divBetween' style='display:none;'>" + settings.filterable.filterAndText + "<br/><div class='searchBox'><input type='text' class='filter-input kTableDatePicker' /></div></div>";
                }
                else {                 
-                   popupMarkup += "<div class='searchBox'><input type='text' class='filter-input' /></div>";
+                   popupMarkup += "<div class='searchBox'><input type='text' class='filter-input active-filter-input' /></div>";
                }
 
 
                popupMarkup += "<div><button class='filter-button' type='submit'>Filter</button><button class='filter-button' type='reset'>Close</button></div>";
                popupMarkup += "<form></div>";
                popupMarkup += "</div>";
+
                $(document.body).append(popupMarkup);
-               $("#" + popupId).slideDown(300);
+
+               // Set the position now
+
+                var windowWidth=$(window).width(); 
+              //  console.log("windowWidth : "+windowWidth);
+               // console.log("left : "+left+" , width : "+windowWidth);
+                 var popupWidth=$("#"+popupId).width();
+                //console.log("popUpWidth:"+popupWidth);
+                
+                var rightPos=windowWidth-left;
+
+                var position;
+                if(left+popupWidth<windowWidth)
+                {
+                    // OK to show in regular place
+                  position= { top: top, left:left};
+                }
+                else
+                { 
+                  // Use the right side positioning
+                  position= { top: top, right:rightPos};
+
+                }
+               
+                $("#" + popupId).css(position).slideDown(300);
+
+
+
+
                //highlight the clicked filter icon
                _clickedAnchor.find("span.k-filter").addClass("filter-selected");
 
@@ -145,11 +222,29 @@
            //Execute the callback function when clicking on the filter button 
            $(document).on("click", "button[type='submit']", function (e) {
                e.preventDefault();
+               var isSearchFormEmpty = false;
                var _clickedSubmit = $(this);
-               if (settings.filterable.callBackOnFilter)
-                   settings.filterable.callBackOnFilter(_clickedSubmit.closest("form"));
+               var anchorId = _clickedSubmit.closest("div.popupContainer").attr("for");
 
-               _clickedSubmit.closest("div.popupContainer").hide();
+               //LEts clear the existing validation css on inputs
+               $("input." + settings.filterable.validationErrorClassName).removeClass(settings.filterable.validationErrorClassName);
+               //Validate the seach for inputs
+               var inputs = _clickedSubmit.closest("div.popupContainer").find("input.active-filter-input");
+               $.each(inputs, function (e) {                  
+                   if ($(this).val() == "") {
+                       isSearchFormEmpty = true;
+                       $(this).addClass(settings.filterable.validationErrorClassName).focus();
+                       return;
+                   }
+               });
+               if (isSearchFormEmpty == false) {
+                   $("a#" + anchorId).find("span").addClass("active");
+
+                   if (settings.filterable.callBackOnFilter)
+                       settings.filterable.callBackOnFilter(_clickedSubmit.closest("form"));
+
+                   _clickedSubmit.closest("div.popupContainer").hide();
+               }
            });
 
            //Close the popup when clicking
@@ -157,6 +252,7 @@
                e.preventDefault();
                var _clickedReset = $(this);
                var anchorId = _clickedReset.closest("div.popupContainer").attr("for");
+               _clickedReset.closest("div.popupContainer").find("input.filter-input").val("");
                _clickedReset.closest("div.popupContainer").hide();
                $("#" + anchorId).find("span.k-filter").removeClass("filter-selected");
 
@@ -166,17 +262,60 @@
 
               //Change event on the ddlSearchType SELECT 
               //If user selected between option, show the end date textbox too;
-           $(document).on("click", "SELECT.ddlSearchType", function (e) {
+           $(document).on("click", "SELECT.ktable-searchtype", function (e) {
                var val = $(this).val();
-               if (val == "between")
+               if (val == "between") {
+                   $("div.divBetween").find("input").addClass("active-filter-input");
                    $("div.divBetween").fadeIn(100);
+               }
                else
                    $("div.divBetween").fadeOut(100).find("input").val("");
            });
 
 
+           // Sort events
+
+          $(document).on("click", "a.ktable-sortHeader", function (e) {          
+            var _clickedAnchor = $(this);
+           
+            //Remove existing sorts css class and attributes on other columns
+            $("a.ktable-sortHeader").each(function(){
+              var _thisSort=$(this);
+              if(_thisSort.attr("id")!=_clickedAnchor.attr("id"))
+              {                 
+                _thisSort.removeClass("sort-active").find("span.ktable-sort").removeClass("ascsort descsort").attr("sortorder","none");
+              }
+            });
+           
+
+            var currentColumnSortSpan=_clickedAnchor.find("span.ktable-sort");
+            var currentSortOrder=currentColumnSortSpan.attr("sortorder");
+
+            if(currentSortOrder==="none" || currentSortOrder=="desc")
+            {               
+              currentColumnSortSpan.attr("sortorder","asc").removeClass("descsort").addClass("ascsort");
+            }
+            else
+            {
+              currentColumnSortSpan.attr("sortorder","desc").removeClass("ascsort").addClass("descsort");
+            }            
+
+            _clickedAnchor.addClass("sort-active");
+
+             if (settings.sortable.callBackOnAscending)
+                settings.sortable.callBackOnAscending(_clickedAnchor);
+          });
+           //sort events
+
+
 
           } //if filter is enabled
+
+
+//Sortable
+
+//Sortable ends
+
 
        }); // return this.each
 

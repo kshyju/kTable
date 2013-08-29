@@ -35,78 +35,105 @@
       <div>
           <h2>For lazy people, kTbl plugin makes a little styling & interactiveness to your tables!</h2>
       </div>
-    <table class="tblList" id="new" cellpadding="0" cellspacing="0" > 
-    <tr class="trHead">
-        <th class="thCheckB">
-            <input type="checkbox" class="chkAll2" />
-        </th>
-        <th class="filterable">Name</th>
-        <th class="filterable">Product Code</th>
-        <th class="filterable" datatype="date">Order date</th>
-
-    </tr>
-       <tr class="even">
-            <td class="tdCheckB">
-                <input class="chkSelect" id="1" name="item.IsSelected" type="checkbox" value="true" /><input name="item.IsSelected" type="hidden" value="false" />
-            </td>
-            <td>
-                <a href="/products/edit/1">EXPLORER LIMITED ED</a>           
-            </td>
-            <td>FORD EXPLORER  LIMITED ED</td>
-           <td>
-               Jan 10th, 2013
-           </td>
-       </tr>
-       <tr class="odd">
-            <td class="tdCheckB">
-                <input class="chkSelect" id="2" name="item.IsSelected" type="checkbox" value="true" /><input name="item.IsSelected" type="hidden" value="false" />
-            </td>
-            <td>
-                <a href="/products/edit/2">F-150</a>           
-            </td>
-            <td>F-150</td>
-                      <td>
-                Jan 10th, 2013
-           </td>
-       </tr>
-       <tr class="even">
-            <td class="tdCheckB">
-                <input class="chkSelect" id="3" name="item.IsSelected" type="checkbox" value="true" /><input name="item.IsSelected" type="hidden" value="false" />
-            </td>
-            <td>
-                <a href="/products/edit/3">MUSTANG</a>           
-            </td>
-            <td>MUSTANG</td>
-                      <td>
-               Jan 10th, 2013
-           </td>
-       </tr>
-       <tr class="odd">
-            <td class="tdCheckB">
-                <input class="chkSelect" id="5" name="item.IsSelected" type="checkbox" value="true" /><input name="item.IsSelected" type="hidden" value="false" />
-            </td>
-            <td>
-                <a href="/products/edit/5">FUSION</a>           
-            </td>
-            <td>FN</td>
-                      <td>
-                Jan 10th, 2013
-           </td>
-       </tr>
-       <tr class="even">
-            <td class="tdCheckB">
-                <input class="chkSelect" id="6" name="item.IsSelected" type="checkbox" value="true" /><input name="item.IsSelected" type="hidden" value="false" />
-            </td>
-            <td>
-                <a href="/products/edit/6">ESCAPE</a>           
-            </td>
-            <td>ESCAPE</td>
-                      <td>
-                Jan 10th, 2013
-           </td>
-       </tr>
-
-
+<table class="tblList" id="new" cellpadding="0" cellspacing="0" > 
+<tr class="trHead">
+  <th class="thCheckB">
+    <input type="checkbox" class="chkAll2" />
+  </th>
+  <th class="filterable" id="firstName">
+    First Name
+  </th>
+  <th class="filterable" id="lname">Last name</th>
+  <th class="filterable" datatype="date">Order date</th>
+  <th class="filterable" id="empCode">Employee Code</th>
+  <th class="filterable" id="email">Email Address</th>
+  <th class="filterable" id="phone">Phone Number</th>
+  <th class="filterable" id="designation">Designation</th>
+  <th class="filterable" id="loc">Location</th>
+  <th class="filterable" id="Age">Age</th>
+</tr>
+<tr class="even">
+  <td class="tdCheckB">
+    <input class="chkSelect" id="1" name="item.IsSelected" type="checkbox" value="true" /><input name="item.IsSelected" type="hidden" value="false" />
+  </td>
+  <td>
+    <a href="/products/edit/1">Dennis Burton</a>           
+  </td>
+  <td>Burton LastName</td>
+  <td>Jan 10th, 2013 </td>
+  <td>OSS-IT-DEV-A001</td>
+  <td>FORD EXPLORER  LIMITED ED</td>
+  <td>FORD EXPLORER  LIMITED ED</td>
+  <td>FORD EXPLORER  LIMITED ED</td>
+  <td>FORD EXPLORER  LIMITED ED</td>
+  <td>FORD EXPLORER  LIMITED ED</td>
+</tr>
+<tr class="odd">
+  <td class="tdCheckB">
+    <input class="chkSelect" id="2" name="item.IsSelected" type="checkbox" value="true" /><input name="item.IsSelected" type="hidden" value="false" />
+  </td>
+  <td>
+    <a href="/products/edit/2">Steve</a>           
+  </td>
+  <td>Jobs</td>
+  <td>
+    Jan 10th, 2013
+  </td>
+  <td>OSS-IT-DEV-A002</td>
+  <td>FORD EXPLORER  LIMITED ED</td>
+  <td>FORD EXPLORER  LIMITED ED</td>
+  <td>FORD EXPLORER  LIMITED ED</td>
+  <td>FORD EXPLORER  LIMITED ED</td>
+  <td>FORD EXPLORER  LIMITED ED</td>
+</tr>
+<tr class="even">
+  <td class="tdCheckB">
+    <input class="chkSelect" id="3" name="item.IsSelected" type="checkbox" value="true" /><input name="item.IsSelected" type="hidden" value="false" />
+  </td>
+  <td>
+    <a href="/products/edit/3">Tim</a>           
+  </td>
+  <td>Cook</td>
+  <td>Jan 10th, 2013</td>
+  <td>OSS-IT-DEV-A003</td>
+  <td>FORD EXPLORER  LIMITED ED</td>
+  <td>FORD EXPLORER  LIMITED ED</td>
+  <td>FORD EXPLORER  LIMITED ED</td>
+  <td>FORD EXPLORER  LIMITED ED</td>
+  <td>FORD EXPLORER  LIMITED ED</td>
+</tr>
+<tr class="odd">
+  <td class="tdCheckB">
+    <input class="chkSelect" id="5" name="item.IsSelected" type="checkbox" value="true" /><input name="item.IsSelected" type="hidden" value="false" />
+  </td>
+  <td>
+    <a href="/products/edit/5">Frank</a>           
+  </td>
+  <td>Underwood</td>
+  <td>Jan 10th, 2013</td>
+  <td>OSS-IT-DEV-A004</td>
+  <td>FORD EXPLORER  LIMITED ED</td>
+  <td>FORD EXPLORER  LIMITED ED</td>
+  <td>FORD EXPLORER  LIMITED ED</td>
+  <td>FORD EXPLORER  LIMITED ED</td>
+  <td>FORD EXPLORER  LIMITED ED</td>
+</tr>
+<tr class="even">
+  <td class="tdCheckB">
+    <input class="chkSelect" id="6" name="item.IsSelected" type="checkbox" value="true" /><input name="item.IsSelected" type="hidden" value="false" />
+  </td>
+  <td>
+    <a href="/products/edit/6">ESCAPE</a>           
+  </td>
+  <td>ESCAPE</td>
+  <td>  Jan 10th, 2013</td>
+  <td>OSS-IT-DEV-A005</td>
+  <td>FORD EXPLORER  LIMITED ED</td>
+  <td>FORD EXPLORER  LIMITED ED</td>
+  <td>FORD EXPLORER  LIMITED ED</td>
+  <td>FORD EXPLORER  LIMITED ED</td>
+  <td>FORD EXPLORER  LIMITED ED</td>
+</tr>
 </table>
      
 
@@ -118,7 +145,7 @@
         <select id="ddlText">
             <option value="same">:( Same as</option>
             <option value="starts">:(Starts</option>
-             <option value="ends">Ends</option>
+             <option value="ends">Ends</option>contains
         </select>
     </body>
     <script type="text/javascript">
@@ -140,6 +167,7 @@
                         }
                    }                  
                 }
+                ,sortable : { callBackOnAscending : function(a){ console.log("sort clicked");}}
             });
            
         });
