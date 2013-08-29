@@ -94,7 +94,7 @@
                if(typeof headerId=='undefined')
                 headerId=anchorId;
 
-               console.log(headerId);
+               
 
 
                var newHeaderMarkup = "<a href='#' datatype='" + dataType + "' id='" + headerId + "' class='ktable-filter'><span class='k-filter'></span></a>";
