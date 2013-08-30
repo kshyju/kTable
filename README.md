@@ -86,14 +86,18 @@ If you set the value of this property to true, kTable will bind the jQuery UI da
 You can customize the content of the filter type dropdown in the popup. If you do not provide any values, kTable will use the default values for the dropdown as follows
 
 **For string type**
-Text : "Contains" 
-Text : "Starts with"
-Text : "Ends with"
+1. item
+2. item
+3. item
+
+
 
 **For datetime type**
-Text : "Equal to" 
-Text : "before"
-Text : "after"
+1. item
+2. item
+3. item
+
+
 
 To customize the dropdown, You need to have 2 SELECT elements in your main page, one for string type and one for datetime type. Then you can tell kTable to use those SELECT elements as the source for the filter type dropdown.
 
