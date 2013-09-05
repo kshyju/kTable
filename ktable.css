@@ -6,6 +6,7 @@
 {
     font-size:12px;font-family:inherit;
     border:1px solid #DBDBDE; overflow:auto; padding:10px; border-radius: 0 0 4px 4px; background-color:#FFFFFF;box-shadow: 0 2px 2px 0 rgba(82, 90, 104, 0.2);    
+    display: block;
 }
 button.filter-button { background-color: #F3F3F4; border-color: #DBDBDE; color: #515967; margin: 0.5em 4% 0 0;  width: 46%; border-radius: 4px 4px 4px 4px;box-shadow: none;border-style: solid;  border-width: 1px; cursor:pointer;}
 .filter-button:hover {  background-color:#A6AFBE;border-color:#A6AFBE;   color:#263248;}

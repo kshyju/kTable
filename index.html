@@ -147,6 +147,7 @@
             <option value="starts">:(Starts</option>
              <option value="ends">Ends</option>contains
         </select>
+        
     </body>
     <script type="text/javascript">
         $(function () {
@@ -160,16 +161,17 @@
                     callBackOnFilter: function (item) { alert("Filter clicked") },
                     callBackOnClear: function (item) { alert("Clear clicked") } ,
                     bindDefaultDatePicker :true
-                   , dropDownContent: {
+                   /*, dropDownContent: {
                         source: {
                             date: "ddlDate",
                             text: "ddlText"
                         }
-                   }                  
+                   }    */              
                 }
                 ,sortable : { callBackOnAscending : function(a){ console.log("sort clicked");}}
             });
            
+
         });
     </script>
 </html>

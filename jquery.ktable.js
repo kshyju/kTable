@@ -151,13 +151,11 @@
                    $("#" + popupId).fadeIn(100);
                    _clickedAnchor.find("span.k-filter").addClass("filter-selected"); 
                    return;
-               }
-
-             
-
+               }           
                
-               var popupMarkup = "<div id='" + popupId + "' for='" + clickedAnchorId + "' class='popupContainer' style='display:none;position:absolute;'>";
-               popupMarkup += "<form class='ktableform' for='" + clickedAnchorId + "' data-type='" + dataType + "'><div>";
+               var popupMarkup = "<div id='" + popupId + "' for='" + clickedAnchorId + "' class='popupContainer' style='position:absolute;display:none;'>";
+               popupMarkup += "<form class='ktableform' for='" + clickedAnchorId + "' data-type='" + dataType + "'>";
+               popupMarkup+="<div>";
                popupMarkup += "<div class='filterHeader'>" + settings.filterable.filterHeaderText + "</div>";
                popupMarkup += "<div class='searchType'><select class='ktable-searchtype'>" + getSelectOptions (_clickedAnchor)+ "</select></div>";
                if (dataType === "date") {
@@ -169,10 +167,10 @@
                    popupMarkup += "<div class='searchBox'><input type='text' class='filter-input active-filter-input' /></div>";
                }
 
-
                popupMarkup += "<div><button class='filter-button' type='submit'>Filter</button><button class='filter-button' type='reset'>Close</button></div>";
-               popupMarkup += "<form></div>";
+               popupMarkup += "</div></form>";
                popupMarkup += "</div>";
+
 
                $(document.body).append(popupMarkup);
 
@@ -198,9 +196,7 @@
                   position= { top: top, right:rightPos};
 
                 }
-               
-                $("#" + popupId).css(position).slideDown(300);
-
+               $("#" + popupId).css(position).slideDown(300);
 
 
 
