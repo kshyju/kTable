@@ -12,7 +12,7 @@ button.filter-button { background-color: #F3F3F4; border-color: #DBDBDE; color: 
 .filter-button:hover {  background-color:#A6AFBE;border-color:#A6AFBE;   color:#263248;}
 SELECT.ktable-searchtype {  width:99%; margin-bottom:6px; margin-top:5px;  border:1px solid #DBDBDE;  font-family: "Segoe UI","Segoe UI Web Regular","Segoe UI Symbol","Helvetica Neue","BBAlpha Sans","S60 Sans",Arial,"sans-serif"; }
 .k-filter {  background-image: url('Images/filter.png');   background-position:3px; background-repeat: no-repeat;   width:20px; height:20px;float:left;  border:none;}
-filter-selected
+.filter-selected
 {    background-image: url('Images/filter-selected.png');   background-position:3px; background-repeat: no-repeat;   width:20px; height:20px;float:left;
    border:none;
 }

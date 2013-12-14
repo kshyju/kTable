@@ -61,7 +61,7 @@ kTable provides a filter feature which you can apply on your table headers. This
         headerCheckBoxClass: "chkAll2",
         filterable: {
                    filterableColumnClassName: 'filterable',
-                   callBackOnFitler: function (item) { alert("Filter clicked") },
+                   callBackOnFilter: function (item) { alert("Filter clicked") },
                    callBackOnClear: function (item) { alert("Clear clicked") }
                 }
     });
